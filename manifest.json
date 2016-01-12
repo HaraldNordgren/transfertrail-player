@@ -1,0 +1,27 @@
+{
+  "name": "Transfertrail player",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "You win every time!",
+  "permissions": ["tabs", "activeTab"],
+
+  "browser_action": {
+    "default_icon": "clubs_football.jpeg"/*,
+    "default_popup": "popup.html"*/
+  },
+
+  "web_accessible_resources": [ "script.js" ],
+
+  /*
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },*/
+  
+  "content_scripts": [
+    {
+      "matches": ["http://www.transfertrail.com/"],
+      "js": ["transfertrail-content.js"]
+    }
+  ]
+}

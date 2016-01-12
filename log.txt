@@ -1,0 +1,19 @@
+adjustOpacity
+
+Leeds
+nextTransfer, Blackburn Rovers, addFlightPath
+nextTransfer, NewCastle United, addFlightPath
+...
+nextTransfer
+
+checkAnswer [multiple]
+moveOn, You have answered 1 out of 1 correctly.
+
+gameOver
+
+
+IGNORE:
+adjustOpacity, nextTransfer, addFlightPath, checkAnswer, You have answered 1 out of 1 correctly.
+
+CLEAR CITIES:
+moveOn
