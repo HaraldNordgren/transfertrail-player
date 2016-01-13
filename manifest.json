@@ -1,22 +1,18 @@
 {
-  "name": "Transfertrail player",
-  "version": "0.1",
+  "name": "Transfer Trail bot",
+  "version": "1.0",
   "manifest_version": 2,
-  "description": "You win every time!",
-  "permissions": ["tabs", "activeTab"],
+  "description": "\"You win every time!\"",
+
+  "icons": {
+    "48": "transfer-trail-logo.png"
+  },
 
   "browser_action": {
-    "default_icon": "clubs_football.jpeg"/*,
-    "default_popup": "popup.html"*/
+    "default_icon": "transfer-trail-logo.png"
   },
 
   "web_accessible_resources": [ "script.js" ],
-
-  /*
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },*/
   
   "content_scripts": [
     {

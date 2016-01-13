@@ -1,121 +1,120 @@
-var relations = {
-    "Steven Gerrard"       : ["Liverpool","LA Galaxy"],
-    "Steve McManaman"      : ["Liverpool","Real Madrid","Manchester City"],
+var clubsByPlayer = {
+    "Alan Shearer"         : ["Southampton","Blackburn Rovers","Newcastle United"],
+    "Andrea Pirlo"         : ["Brescia","Internazionale","Reggina","Brescia","A.C. Milan","Juventus","New York City FC"],
+    "Ángel Di María"       : ["Benfica","Real Madrid","Manchester United","PSG"],
+    "Anthony Martial"      : ["Lyon","Monaco","Manchester United"],
+    "Arjen Robben"         : ["Groningen","PSV Eindhoven","Chelsea","Real Madrid","Bayern Munich"],
+    "Arturo Vidal"         : ["Colo Colo","Bayer Leverkusen","Juventus","Bayern Munich"],
     "Ashley Cole"          : ["Arsenal","Crystal Palace","Arsenal","Chelsea","A.S. Roma"],
     "Bacary Sagna"         : ["Auxerre","Arsenal","Manchester City"],
-    "Mario Götze"          : ["Borussia Dortmund","Bayern Munich"],
-    "Gareth Bale"          : ["Southampton","Tottenham","Real Madrid"],
-    "Denis Irwin"          : ["Leeds","Oldham Athletic","Manchester United","Wolverhampton Wanderers"],
-    "Pepe Reina"           : ["Barcelona","Villarreal CF","Liverpool","Bayern Munich","Napoli"],
-    "Jonathan Walters"     : ["Blackburn Rovers","Bolton Wanderers","Hull City","Crewe Alexandra","Barnsley","Hull City","Scunthorpe United","Wrexham","Chester City","Ipswich Town","Stoke City"],
-    "Peter Schmeichel"     : ["Auxerre","Martigues","Marseille","Bordeaux","Gladsaxe-Hero","Hvidovre","Brondby","Manchester United","Sporting Cp","Aston Villa","Manchester City"],
-    "Ezequiel Lavezzi"     : ["Club Atlético Independiente","Genoa","San Lorenzo","Napoli","PSG"],
-    "Gerard Pique"         : ["Manchester United","Barcelona"],
-    "Mark Hughes"          : ["Manchester United","Barcelona","Manchester United","Chelsea","Southampton","Everton","Blackburn Rovers"],
-    "Tim Cahill"           : ["Millwall","Everton","New York City FC","Shanghai Shenhua"],
-    "Zinedine Zidane"      : ["AS Cannes","Bordeaux","Juventus","Real Madrid"],
-    "Rio Ferdinand"        : ["West Ham","Bournemouth","Leeds","Manchester United","QPR"],
-    "Frank Lampard"        : ["West Ham","Swansea City","West Ham","Chelsea","Manchester City","New York City FC"],
-    "Graeme Le Saux"       : ["Chelsea","Blackburn Rovers","Chelsea","Southampton"],
-    "Shay Given"           : ["Blackburn Rovers","Newcastle United","Manchester City","Aston Villa","Stoke City"],
-    "Robert Lewandowski"   : ["Znicz Pruszkow","Lech Poznan","Borussia Dortmund","Bayern Munich"],
-    "Jermain Defoe"        : ["West Ham","Bournemouth","West Ham","Tottenham","Portsmouth","Tottenham","Toronto FC","Tottenham","Sunderland"],
-    "Fernando Torres"      : ["Atlético Madrid","Liverpool","Chelsea","A.C. Milan","Atlético Madrid"],
-    "Zlatan Ibrahimović"   : ["Malmo","Ajax","Juventus","Internazionale"],
-    "Cristiano Ronaldo"    : ["Sporting Cp","Manchester United","Real Madrid"],
-    "Stewart Downing"      : ["Middlesbrough","Aston Villa","Liverpool","West Ham","Middlesbrough"],
-    "Pavel Nedvěd"         : ["Dukla Prague","Sparta Prague","S.S. Lazio","Juventus"],
-    "Anthony Martial"      : ["Lyon","Monaco","Manchester United"],
-    "Mario Balotelli"      : ["Lumezzane","Internazionale","Manchester City","A.C. Milan","Liverpool"],
-    "Ángel Di María"       : ["Benfica","Real Madrid","Manchester United","PSG"],
-    "David Batty"          : ["Leeds","Blackburn Rovers","Newcastle United","Leeds"],
-    "Edwin van der Sar"    : ["Ajax","Juventus","Fulham","Manchester United"],
-    "Sol Campbell"         : ["Tottenham","Arsenal","Portsmouth","Notts County","Arsenal","Newcastle United"],
-    "Cesc Fabregas"        : ["Arsenal","Barcelona","Chelsea"],
-    "James Milner"         : ["Leeds","Newcastle United","Aston Villa","Manchester City","Liverpool"],
-    "Edin Džeko"           : ["Zeljeznicar","Teplice","Ústí nad Labem","VfL Wolfsburg","Manchester City","A.S. Roma"],
-    "Ian Rush"             : ["Chester City","Liverpool","Juventus","Liverpool","Leeds","Newcastle United","Wrexham","Sydney Olympic"],
-    "Hernan Crespo"        : ["River Plate","Parma","S.S. Lazio","Internazionale","Chelsea","A.C. Milan","Internazionale","Genoa","Parma"],
-    "Michael Carrick"      : ["West Ham","Tottenham","Manchester United"],
-    "Peter Schmeichel"     : ["Gladsaxe-Hero","Hvidovre","Brondby","Manchester United","Sporting Cp","Aston Villa","Manchester City"],
-    "Kaká"                 : ["São Paulo FC","A.C. Milan","Real Madrid","A.C. Milan","Orlando City"],
-    "Eric Cantona"         : ["Auxerre","Martigues","Marseille","Bordeaux","Montpellier","Nimes","Leeds","Manchester United"],
-    "Emmanuel Petit"       : ["Monaco","Arsenal","Barcelona","Chelsea"],
-    "Wesley Sneijder"      : ["Ajax","Real Madrid","Internazionale","Galatasaray"],
-    "Andrea Pirlo"         : ["Brescia","Internazionale","Reggina","Brescia","A.C. Milan","Juventus","New York City FC"],
-    "Alan Shearer"         : ["Southampton","Blackburn Rovers","Newcastle United"],
-    "Carlos Tevez"         : ["Boca Juniors","Corinthians","West Ham","Manchester United","Manchester City","Juventus","Boca Juniors"],
-    "Vincent Kompany"      : ["Anderlecht","Hamburger SV","Manchester City"],
-    "Rafael van der Vaart" : ["Ajax","Hamburger SV","Real Madrid","Tottenham","Hamburger SV","Real Betis"],
-    "Dennis Bergkamp"      : ["Ajax","Internazionale","Arsenal"],
-    "Arjen Robben"         : ["Groningen","PSV Eindhoven","Chelsea","Real Madrid","Bayern Munich"],
-    "Clint Dempsey"        : ["New England Revolution","Fulham","Tottenham","Seattle Sounders FC"],
-    "Edgar Davids"         : ["Ajax","A.C. Milan","Juventus","Barcelona","Tottenham","Ajax","Crystal Palace","Barnet"],
-    "Nani"                 : ["Sporting Cp","Manchester United","Sporting Cp","Fenerbahce"],
-    "Miroslav Klose"       : ["FC 08 Homburg","1. FC Kaiserslautern","Werder Bremen","Bayern Munich","Lazio"],
-    "Jonathan Woodgate"    : ["Leeds","Newcastle United","Real Madrid","Middlesbrough","Tottenham","Stoke City","Middlesbrough"],
-    "Mesut Özil"           : ["Schalke 04","Werder Bremen","Real Madrid","Arsenal"],
-    "Radamel Falcao"       : ["River Plate","Porto","Atlético Madrid","Monaco","Manchester United","Chelsea"],
-    "Ian Wright"           : ["Crystal Palace","Arsenal","West Ham","Celtic","Burnley"],
     "Bebé"                 : ["Estrela","Vitoria de Guimaraes","Manchester United","Besiktas","Rio Ave","Pacos de Ferreira","Benfica"],
-    "Diego Forlán"         : ["Club Atlético Independiente","Manchester United","Villarreal CF","Atlético Madrid","Internazionale","Sport Club Internacional","Cerezo Osaka","Peñarol"],
-    "Michael Owen"         : ["Liverpool","Real Madrid","Newcastle United","Manchester United","Stoke City"],
-    "Juan Mata"            : ["Real Madrid","Valencia","Chelsea","Manchester United"],
-    "Kevin De Bruyne"      : ["Genk","Chelsea","VfL Wolfsburg","Manchester City"],
-    "Paul Ince"            : ["West Ham","Manchester United","Internazionale","Liverpool","Middlesbrough","Wolverhampton Wanderers"],
-    "Jordan Rhodes"        : ["Ipswich Town","Oxford United","Rochdale","Brentford","Huddersfield Town","Blackburn Rovers"],
-    "David Beckham"        : ["Manchester United","Real Madrid","LA Galaxy","A.C. Milan","PSG"],
-    "Robbie Keane"         : ["Wolverhampton Wanderers","Coventry","Internazionale","Leeds","Tottenham","Liverpool","Tottenham","Celtic","West Ham","LA Galaxy"],
-    "Jordan Henderson"     : ["Sunderland","Coventry","Liverpool"],
-    "Esteban Cambiasso"    : ["Club Atlético Independiente","River Plate","Real Madrid","Internazionale","Leicester City","Olympiacos"],
+    "Carlos Tevez"         : ["Boca Juniors","Corinthians","West Ham","Manchester United","Manchester City","Juventus","Boca Juniors"],
+    "Cesc Fabregas"        : ["Arsenal","Barcelona","Chelsea"],
+    "Clint Dempsey"        : ["New England Revolution","Fulham","Tottenham","Seattle Sounders FC"],
+    "Cristiano Ronaldo"    : ["Sporting Cp","Manchester United","Real Madrid"],
     "Dani Alves"           : ["Bahia","Sevilla","Barcelona"],
-    "Mathieu Valbuena"     : ["Libourne","Marseille","Dynamo Moscow"],
-    "Lee Tomlin"           : ["Rushden","Peterborough","Middlesbrough","Bournemouth"],
-    "Séamus Coleman"       : ["Sligo Rovers","Everton","Blackpool","Everton"],
-    "Patrick Kluivert"     : ["Ajax","A.C. Milan","Barcelona","Newcastle United","Valencia","PSV Eindhoven","Lille"],
-    "Toni Kroos"           : ["Bayern Munich","Bayer Leverkusen","Bayern Munich","Real Madrid"],
-    "Arturo Vidal"         : ["Colo Colo","Bayer Leverkusen","Juventus","Bayern Munich"],
-    "Landon Donovan"       : ["Bayer Leverkusen","San Jose Earthquakes","LA Galaxy","Bayern Munich","LA Galaxy","Everton","LA Galaxy"],
-    "Yaya Touré"           : ["Beveren","Metalurh Donetsk","Olympiacos","Monaco","Barcelona","Manchester City"],
-    "Willian"              : ["Corinthians","Shakhtar Donetsk","Anzhi Makhachkala","Chelsea"],
-    "Luis Suárez"          : ["Nacional","Groningen","Ajax","Liverpool","Barcelona"],
+    "David Batty"          : ["Leeds","Blackburn Rovers","Newcastle United","Leeds"],
+    "David Beckham"        : ["Manchester United","Real Madrid","LA Galaxy","A.C. Milan","PSG"],
+    "Denis Irwin"          : ["Leeds","Oldham Athletic","Manchester United","Wolverhampton Wanderers"],
+    "Dennis Bergkamp"      : ["Ajax","Internazionale","Arsenal"],
+    "Diego Forlán"         : ["Club Atlético Independiente","Manchester United","Villarreal CF","Atlético Madrid","Internazionale","Sport Club Internacional","Cerezo Osaka","Peñarol"],
+    "Edgar Davids"         : ["Ajax","A.C. Milan","Juventus","Barcelona","Tottenham","Ajax","Crystal Palace","Barnet"],
+    "Edin Džeko"           : ["Zeljeznicar","Teplice","Ústí nad Labem","VfL Wolfsburg","Manchester City","A.S. Roma"],
+    "Edwin van der Sar"    : ["Ajax","Juventus","Fulham","Manchester United"],
+    "Emmanuel Petit"       : ["Monaco","Arsenal","Barcelona","Chelsea"],
+    "Eric Cantona"         : ["Auxerre","Martigues","Marseille","Bordeaux","Montpellier","Nimes","Leeds","Manchester United"],
+    "Esteban Cambiasso"    : ["Club Atlético Independiente","River Plate","Real Madrid","Internazionale","Leicester City","Olympiacos"],
+    "Ezequiel Lavezzi"     : ["Club Atlético Independiente","Genoa","San Lorenzo","Napoli","PSG"],
+    "Fernando Torres"      : ["Atlético Madrid","Liverpool","Chelsea","A.C. Milan","Atlético Madrid"],
+    "Frank Lampard"        : ["West Ham","Swansea City","West Ham","Chelsea","Manchester City","New York City FC"],
+    "Gareth Bale"          : ["Southampton","Tottenham","Real Madrid"],
+    "Gerard Pique"         : ["Manchester United","Barcelona"],
+    "Graeme Le Saux"       : ["Chelsea","Blackburn Rovers","Chelsea","Southampton"],
+    "Hernan Crespo"        : ["River Plate","Parma","S.S. Lazio","Internazionale","Chelsea","A.C. Milan","Internazionale","Genoa","Parma"],
+    "Ian Rush"             : ["Chester City","Liverpool","Juventus","Liverpool","Leeds","Newcastle United","Wrexham","Sydney Olympic"],
+    "Ian Wright"           : ["Crystal Palace","Arsenal","West Ham","Celtic","Burnley"],
+    "James Milner"         : ["Leeds","Newcastle United","Aston Villa","Manchester City","Liverpool"],
     "James Rodríguez"      : ["Porto","Monaco","Real Madrid"],
-    "Sylvinho"             : ["Corinthians","Arsenal","Celta Vigo","Barcelona","Manchester City"],
+    "Jermain Defoe"        : ["West Ham","Bournemouth","West Ham","Tottenham","Portsmouth","Tottenham","Toronto FC","Tottenham","Sunderland"],
+    "Jonathan Walters"     : ["Blackburn Rovers","Bolton Wanderers","Hull City","Crewe Alexandra","Barnsley","Hull City","Scunthorpe United","Wrexham","Chester City","Ipswich Town","Stoke City"],
+    "Jonathan Woodgate"    : ["Leeds","Newcastle United","Real Madrid","Middlesbrough","Tottenham","Stoke City","Middlesbrough"],
+    "Jordan Henderson"     : ["Sunderland","Coventry","Liverpool"],
+    "Jordan Rhodes"        : ["Ipswich Town","Oxford United","Rochdale","Brentford","Huddersfield Town","Blackburn Rovers"],
+    "José Antonio Reyes"   : ["Sevilla","Arsenal","Real Madrid","Atlético Madrid","Benfica","Sevilla"],
+    "Juan Mata"            : ["Real Madrid","Valencia","Chelsea","Manchester United"],
+    "Kaká"                 : ["São Paulo FC","A.C. Milan","Real Madrid","A.C. Milan","Orlando City"],
+    "Kevin De Bruyne"      : ["Genk","Chelsea","VfL Wolfsburg","Manchester City"],
+    "Landon Donovan"       : ["Bayer Leverkusen","San Jose Earthquakes","LA Galaxy","Bayern Munich","LA Galaxy","Everton","LA Galaxy"],
+    "Lee Tomlin"           : ["Rushden","Peterborough","Middlesbrough","Bournemouth"],
+    "Luis Suárez"          : ["Nacional","Groningen","Ajax","Liverpool","Barcelona"],
+    "Mario Balotelli"      : ["Lumezzane","Internazionale","Manchester City","A.C. Milan","Liverpool"],
     "Mario Gómez"          : ["Stuttgart","Bayern Munich","Fiorentina","Besiktas"],
+    "Mario Götze"          : ["Borussia Dortmund","Bayern Munich"],
+    "Mark Hughes"          : ["Manchester United","Barcelona","Manchester United","Chelsea","Southampton","Everton","Blackburn Rovers"],
+    "Mathieu Valbuena"     : ["Libourne","Marseille","Dynamo Moscow"],
+    "Mesut Özil"           : ["Schalke 04","Werder Bremen","Real Madrid","Arsenal"],
+    "Michael Carrick"      : ["West Ham","Tottenham","Manchester United"],
+    "Michael Owen"         : ["Liverpool","Real Madrid","Newcastle United","Manchester United","Stoke City"],
+    "Miroslav Klose"       : ["FC 08 Homburg","1. FC Kaiserslautern","Werder Bremen","Bayern Munich","Lazio"],
+    "Nani"                 : ["Sporting Cp","Manchester United","Sporting Cp","Fenerbahce"],
     "Nathaniel Clyne"      : ["Crystal Palace","Southampton","Liverpool"],
-    "Thierry Henry"        : ["West Ham","Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
-    "_Thierry Henry"       : ["Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
-    "Oscar"                : ["São Paulo FC","Internacional","Chelsea"],
-    "Sergio Agüero"        : ["Independiente","Atlético Madrid","Manchester City"],
     "Nigel de Jong"        : ["Ajax","Hamburger SV","Manchester City","A.C. Milan"],
-    "José Antonio Reyes"   : ["Sevilla","Arsenal","Real Madrid","Atlético Madrid","Benfica","Sevilla"]
-
-
+    "Oscar"                : ["São Paulo FC","Internacional","Chelsea"],
+    "Patrick Kluivert"     : ["Ajax","A.C. Milan","Barcelona","Newcastle United","Valencia","PSV Eindhoven","Lille"],
+    "Paul Ince"            : ["West Ham","Manchester United","Internazionale","Liverpool","Middlesbrough","Wolverhampton Wanderers"],
+    "Pavel Nedvěd"         : ["Dukla Prague","Sparta Prague","S.S. Lazio","Juventus"],
+    "Pepe Reina"           : ["Barcelona","Villarreal CF","Liverpool","Bayern Munich","Napoli"],
+    "Peter Schmeichel"     : ["Auxerre","Martigues","Marseille","Bordeaux","Gladsaxe-Hero","Hvidovre","Brondby","Manchester United","Sporting Cp","Aston Villa","Manchester City"],
+    "Peter Schmeichel"     : ["Gladsaxe-Hero","Hvidovre","Brondby","Manchester United","Sporting Cp","Aston Villa","Manchester City"],
+    "Radamel Falcao"       : ["River Plate","Porto","Atlético Madrid","Monaco","Manchester United","Chelsea"],
+    "Rafael van der Vaart" : ["Ajax","Hamburger SV","Real Madrid","Tottenham","Hamburger SV","Real Betis"],
+    "Rio Ferdinand"        : ["West Ham","Bournemouth","Leeds","Manchester United","QPR"],
+    "Robbie Keane"         : ["Wolverhampton Wanderers","Coventry","Internazionale","Leeds","Tottenham","Liverpool","Tottenham","Celtic","West Ham","LA Galaxy"],
+    "Robert Lewandowski"   : ["Znicz Pruszkow","Lech Poznan","Borussia Dortmund","Bayern Munich"],
+    "Séamus Coleman"       : ["Sligo Rovers","Everton","Blackpool","Everton"],
+    "Sergio Agüero"        : ["Independiente","Atlético Madrid","Manchester City"],
+    "Shay Given"           : ["Blackburn Rovers","Newcastle United","Manchester City","Aston Villa","Stoke City"],
+    "Sol Campbell"         : ["Tottenham","Arsenal","Portsmouth","Notts County","Arsenal","Newcastle United"],
+    "Steve McManaman"      : ["Liverpool","Real Madrid","Manchester City"],
+    "Steven Gerrard"       : ["Liverpool","LA Galaxy"],
+    "Stewart Downing"      : ["Middlesbrough","Aston Villa","Liverpool","West Ham","Middlesbrough"],
+    "Sylvinho"             : ["Corinthians","Arsenal","Celta Vigo","Barcelona","Manchester City"],
+    "_Thierry Henry"       : ["Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
+    "Thierry Henry"        : ["West Ham","Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
+    "Tim Cahill"           : ["Millwall","Everton","New York City FC","Shanghai Shenhua"],
+    "Toni Kroos"           : ["Bayern Munich","Bayer Leverkusen","Bayern Munich","Real Madrid"],
+    "Vincent Kompany"      : ["Anderlecht","Hamburger SV","Manchester City"],
+    "Wesley Sneijder"      : ["Ajax","Real Madrid","Internazionale","Galatasaray"],
+    "Willian"              : ["Corinthians","Shakhtar Donetsk","Anzhi Makhachkala","Chelsea"],
+    "Yaya Touré"           : ["Beveren","Metalurh Donetsk","Olympiacos","Monaco","Barcelona","Manchester City"],
+    "Zinedine Zidane"      : ["AS Cannes","Bordeaux","Juventus","Real Madrid"],
+    "Zlatan Ibrahimović"   : ["Malmo","Ajax","Juventus","Internazionale"]
 };
 
-//    "" : clubs,
-
-document.getElementsByClassName("hex-btn play")[0].click();
-document.getElementsByClassName("instructions-content__play-btn btn btn--blindroll instructions-btn center-block noselect")[0].click();
-
-var clubs     = [];
-var exhausted = false;
-
-var originalTitle = document.title;
-var players   = document.getElementsByClassName("sidebar-qa-content__answers")[0].getElementsByTagName("a");
-
-var DEBUG     = true;
-
+var originalTitle           = document.title;
+var answerButtons           = document.getElementsByClassName("sidebar-qa-content__answers")[0].getElementsByTagName("a");
+var answerOptions           = [];
+var clubs                   = [];
+var matches                 = [];
+var exhausted               = false;
+var answerOptionsUpdated    = false;
+var DEBUG                   = true;
 
 function findMatches() {
-    var matches = [];
-    for (var player in relations) {
-        playerClubs = relations[player];
-        if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0,clubs.length)) == JSON.stringify(clubs)) {
+    matches = [];
+    for (var player in clubsByPlayer) {
+        playerClubs = clubsByPlayer[player];
+        if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0, clubs.length)) == JSON.stringify(clubs)) {
             matches.push(player.replace(/_/g, ''));
         }
     }
-    return matches;
+}
+
+function getPlayerNameFromAnswerButtons() {
+    answerOptions = [];
+    for (var i = 0; i < answerButtons.length; i++) {
+        answerOptions.push(answerButtons[i].firstChild.nodeValue);
+    }
 }
 
 console.log = function(msg) {
@@ -127,7 +126,7 @@ console.log = function(msg) {
 
     if (msg == "moveOn" || msg == "gameOver") {
         
-        if (DEBUG && findMatches().length == 0) {
+        if (DEBUG && matches.length == 0) {
 
             var clubsPadded = [];
             for (var i = 0; i < clubs.length; i++) {
@@ -136,8 +135,8 @@ console.log = function(msg) {
             window.prompt("", "[" + clubsPadded + "]");
 
             var p = "";
-            for (var i = 0; i < players.length; i++) {
-                p += players[i].firstChild.nodeValue + " ";
+            for (var i = 0; i < answerButtons.length; i++) {
+                p += answerButtons[i].firstChild.nodeValue + " ";
             }
             window.prompt("", p);
         }
@@ -145,7 +144,7 @@ console.log = function(msg) {
         document.title = originalTitle;
         clubs = [];
         exhausted = false;
-
+        answerOptionsUpdated = false;
         return;
     }
 
@@ -155,38 +154,54 @@ console.log = function(msg) {
         return;
     }
 
-    matches = findMatches();
+    findMatches();
 
     if (matches.length == 0) {
         exhausted = true;
-    } else if (matches.length == 1) {
-        document.title = clubs + " -> " + matches[0];
-        exhausted = true;
+        return;
+    }
 
-        for (var i = 0; i < players.length; i++) {
-            if (matches[0] == players[i].firstChild.nodeValue) {
-                players[i].click();
+    if (matches.length == 1) {
+        document.title = clubs + " -> " + matches[0];
+
+        for (var i = 0; i < answerButtons.length; i++) {
+            if (matches[0] == answerButtons[i].firstChild.nodeValue) {
+                answerButtons[i].click();
                 break;
             }
         }
-    } else {
-        document.title = clubs + " -> " + matches;
-        var answerMatches = [];
-        for (var i = 0; i < players.length; i++) {
-            var playerName = players[i].firstChild.nodeValue;
-            for (var j = 0; j < matches.length; j++) {
-                if (playerName == matches[j]) {
-                    answerMatches.push(players[i]);
-                    break;
-                }
+
+        exhausted = true;
+        return;
+    }
+
+    document.title = clubs + " -> " + matches;
+    
+    if (!answerOptionsUpdated) {
+        getPlayerNameFromAnswerButtons();
+        answerOptionsUpdated = true;
+    }
+
+    var answerMatches = [];
+    for (var j = 0; j < matches.length; j++) {
+        for (var i = 0; i < answerOptions.length; i++) {
+            if (answerOptions[i] == matches[j]) {
+                answerMatches.push(answerButtons[i]);
+                break;
             }
         }
-        if (answerMatches.length == 0) {
-            document.title = "No matches in answers";
-            exhausted = true;
-        } else if (answerMatches.length == 1) {
-            document.title = clubs + " -> " + answerMatches[0].firstChild.nodeValue;
-            answerMatches[0].click();
-        }
+    }
+
+    if (answerMatches.length == 0) {
+        document.title = "No matches in answers";
+        exhausted = true;
+    } else if (answerMatches.length == 1) {
+        document.title = clubs + " -> " + answerMatches[0].firstChild.nodeValue;
+        answerMatches[0].click();
     }
 };
+
+
+//Get past start screen and instructions
+document.getElementsByClassName("hex-btn play")[0].click();
+document.getElementsByClassName("instructions-content__play-btn btn btn--blindroll instructions-btn center-block noselect")[0].click();
