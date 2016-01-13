@@ -84,6 +84,7 @@ var relations = {
     "Mario Gómez"          : ["Stuttgart","Bayern Munich","Fiorentina","Besiktas"],
     "Nathaniel Clyne"      : ["Crystal Palace","Southampton","Liverpool"],
     "Thierry Henry"        : ["West Ham","Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
+    "_Thierry Henry"       : ["Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
     "Oscar"                : ["São Paulo FC","Internacional","Chelsea"],
     "Sergio Agüero"        : ["Independiente","Atlético Madrid","Manchester City"],
     "Nigel de Jong"        : ["Ajax","Hamburger SV","Manchester City","A.C. Milan"],
@@ -94,6 +95,8 @@ var relations = {
 
 //    "" : clubs,
 
+document.getElementsByClassName("hex-btn play")[0].click();
+document.getElementsByClassName("instructions-content__play-btn btn btn--blindroll instructions-btn center-block noselect")[0].click();
 
 var clubs     = [];
 var exhausted = false;
@@ -109,20 +112,20 @@ function findMatches() {
     for (var player in relations) {
         playerClubs = relations[player];
         if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0,clubs.length)) == JSON.stringify(clubs)) {
-            matches.push(player);
+            matches.push(player.replace(/_/g, ''));
         }
     }
     return matches;
 }
 
 console.log = function(msg) {
-    if (msg == "adjustOpacity" || msg == "nextTransfer" || msg == "addFlightPath" || msg == "checkAnswer" || msg == "gameOver" ||
+    if (msg == "adjustOpacity" || msg == "nextTransfer" || msg == "addFlightPath" || msg == "checkAnswer" ||
         /^You have answered \d+ out of \d+ correctly.$/.test(msg)) {
 
         return;
     }
 
-    if (msg == "moveOn") {
+    if (msg == "moveOn" || msg == "gameOver") {
         
         if (DEBUG && findMatches().length == 0) {
 
