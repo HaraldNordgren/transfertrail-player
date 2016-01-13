@@ -63,7 +63,27 @@ var relations = {
     "Michael Owen"         : ["Liverpool","Real Madrid","Newcastle United","Manchester United","Stoke City"],
     "Juan Mata"            : ["Real Madrid","Valencia","Chelsea","Manchester United"],
     "Kevin De Bruyne"      : ["Genk","Chelsea","VfL Wolfsburg","Manchester City"],
-    "Paul Ince"            : ["West Ham","Manchester United","Internazionale","Liverpool","Middlesbrough","Wolverhampton Wanderers"]
+    "Paul Ince"            : ["West Ham","Manchester United","Internazionale","Liverpool","Middlesbrough","Wolverhampton Wanderers"],
+    "Jordan Rhodes"        : ["Ipswich Town","Oxford United","Rochdale","Brentford","Huddersfield Town","Blackburn Rovers"],
+    "David Beckham"        : ["Manchester United","Real Madrid","LA Galaxy","A.C. Milan","PSG"],
+    "Robbie Keane"         : ["Wolverhampton Wanderers","Coventry","Internazionale","Leeds","Tottenham","Liverpool","Tottenham","Celtic","West Ham","LA Galaxy"],
+    "Jordan Henderson"     : ["Sunderland","Coventry","Liverpool"],
+    "Esteban Cambiasso"    : ["Club Atlético Independiente","River Plate","Real Madrid","Internazionale","Leicester City","Olympiacos"],
+    "Dani Alves"           : ["Bahia","Sevilla","Barcelona"],
+    "Mathieu Valbuena"     : ["Libourne","Marseille","Dynamo Moscow"],
+    "Lee Tomlin"           : ["Rushden","Peterborough","Middlesbrough","Bournemouth"],
+    "Séamus Coleman"       : ["Sligo Rovers","Everton","Blackpool","Everton"],
+    "Patrick Kluivert"     : ["Ajax","A.C. Milan","Barcelona","Newcastle United","Valencia","PSV Eindhoven","Lille"],
+    "Toni Kroos"           : ["Bayern Munich","Bayer Leverkusen","Bayern Munich","Real Madrid"],
+    "Arturo Vidal"         : ["Colo Colo","Bayer Leverkusen","Juventus","Bayern Munich"],
+    "Landon Donovan"       : ["Bayer Leverkusen","San Jose Earthquakes","LA Galaxy","Bayern Munich","LA Galaxy","Everton","LA Galaxy"],
+    "Yaya Touré"           : ["Beveren","Metalurh Donetsk","Olympiacos","Monaco","Barcelona","Manchester City"],
+    "Willian"              : ["Corinthians","Shakhtar Donetsk","Anzhi Makhachkala","Chelsea"],
+    "Luis Suárez"          : ["Nacional","Groningen","Ajax","Liverpool","Barcelona"],
+    "James Rodríguez"      : ["Porto","Monaco","Real Madrid"],
+    "Sylvinho"             : ["Corinthians","Arsenal","Celta Vigo","Barcelona","Manchester City"],
+    "Mario Gómez"          : ["Stuttgart","Bayern Munich","Fiorentina","Besiktas"],
+    "Nathaniel Clyne"      : ["Crystal Palace","Southampton","Liverpool"]
 
 
 };
@@ -135,6 +155,7 @@ console.log = function(msg) {
         exhausted = true;
     } else if (matches.length == 1) {
         document.title = matches[0];
+
         exhausted = true;
 
         for (var i = 0; i < players.length; i++) {
@@ -142,6 +163,24 @@ console.log = function(msg) {
                 players[i].click();
                 break;
             }
+        }
+    } else {
+        document.title = matches;
+        var answerMatches = [];
+        for (var i = 0; i < players.length; i++) {
+            var playerName = players[i].firstChild.nodeValue;
+            for (var j = 0; j < matches.length; j++) {
+                if (playerName == matches[j]) {
+                    answerMatches.push(players[i]);
+                    break;
+                }
+            }
+        }
+        if (answerMatches.length == 0) {
+            exhausted = true;
+        } else if (answerMatches.length == 1) {
+            document.title = answerMatches[0].firstChild.nodeValue;
+            answerMatches[0].click();
         }
     }
 };
