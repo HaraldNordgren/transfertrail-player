@@ -42,7 +42,6 @@ var relations = {
     "Eric Cantona"         : ["Auxerre","Martigues","Marseille","Bordeaux","Montpellier","Nimes","Leeds","Manchester United"],
     "Emmanuel Petit"       : ["Monaco","Arsenal","Barcelona","Chelsea"],
     "Wesley Sneijder"      : ["Ajax","Real Madrid","Internazionale","Galatasaray"],
-    "Thierry Henry"        : ["Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
     "Andrea Pirlo"         : ["Brescia","Internazionale","Reggina","Brescia","A.C. Milan","Juventus","New York City FC"],
     "Alan Shearer"         : ["Southampton","Blackburn Rovers","Newcastle United"],
     "Carlos Tevez"         : ["Boca Juniors","Corinthians","West Ham","Manchester United","Manchester City","Juventus","Boca Juniors"],
@@ -83,7 +82,12 @@ var relations = {
     "James Rodríguez"      : ["Porto","Monaco","Real Madrid"],
     "Sylvinho"             : ["Corinthians","Arsenal","Celta Vigo","Barcelona","Manchester City"],
     "Mario Gómez"          : ["Stuttgart","Bayern Munich","Fiorentina","Besiktas"],
-    "Nathaniel Clyne"      : ["Crystal Palace","Southampton","Liverpool"]
+    "Nathaniel Clyne"      : ["Crystal Palace","Southampton","Liverpool"],
+    "Thierry Henry"        : ["West Ham","Monaco","Juventus","Arsenal","Barcelona","New York Red Bulls"],
+    "Oscar"                : ["São Paulo FC","Internacional","Chelsea"],
+    "Sergio Agüero"        : ["Independiente","Atlético Madrid","Manchester City"],
+    "Nigel de Jong"        : ["Ajax","Hamburger SV","Manchester City","A.C. Milan"],
+    "José Antonio Reyes"   : ["Sevilla","Arsenal","Real Madrid","Atlético Madrid","Benfica","Sevilla"]
 
 
 };
@@ -149,13 +153,11 @@ console.log = function(msg) {
     }
 
     matches = findMatches();
-    document.title = "Matches: " + matches.length;
 
     if (matches.length == 0) {
         exhausted = true;
     } else if (matches.length == 1) {
-        document.title = matches[0];
-
+        document.title = clubs + " -> " + matches[0];
         exhausted = true;
 
         for (var i = 0; i < players.length; i++) {
@@ -165,7 +167,7 @@ console.log = function(msg) {
             }
         }
     } else {
-        document.title = matches;
+        document.title = clubs + " -> " + matches;
         var answerMatches = [];
         for (var i = 0; i < players.length; i++) {
             var playerName = players[i].firstChild.nodeValue;
@@ -177,9 +179,10 @@ console.log = function(msg) {
             }
         }
         if (answerMatches.length == 0) {
+            document.title = "No matches in answers";
             exhausted = true;
         } else if (answerMatches.length == 1) {
-            document.title = answerMatches[0].firstChild.nodeValue;
+            document.title = clubs + " -> " + answerMatches[0].firstChild.nodeValue;
             answerMatches[0].click();
         }
     }
