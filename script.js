@@ -64,7 +64,6 @@ var clubsByPlayer = {
     "Paul Ince"            : ["West Ham","Manchester United","Internazionale","Liverpool","Middlesbrough","Wolverhampton Wanderers"],
     "Pavel Nedvěd"         : ["Dukla Prague","Sparta Prague","S.S. Lazio","Juventus"],
     "Pepe Reina"           : ["Barcelona","Villarreal CF","Liverpool","Bayern Munich","Napoli"],
-    "Peter Schmeichel"     : ["Auxerre","Martigues","Marseille","Bordeaux","Gladsaxe-Hero","Hvidovre","Brondby","Manchester United","Sporting Cp","Aston Villa","Manchester City"],
     "Peter Schmeichel"     : ["Gladsaxe-Hero","Hvidovre","Brondby","Manchester United","Sporting Cp","Aston Villa","Manchester City"],
     "Radamel Falcao"       : ["River Plate","Porto","Atlético Madrid","Monaco","Manchester United","Chelsea"],
     "Rafael van der Vaart" : ["Ajax","Hamburger SV","Real Madrid","Tottenham","Hamburger SV","Real Betis"],
@@ -104,7 +103,7 @@ function findMatches() {
     matches = [];
     for (var player in clubsByPlayer) {
         playerClubs = clubsByPlayer[player];
-        if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0, clubs.length)) == JSON.stringify(clubs)) {
+        if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0, clubs.length)) === JSON.stringify(clubs)) {
             matches.push(player.replace(/_/g, ''));
         }
     }
@@ -118,15 +117,15 @@ function getPlayerNameFromAnswerButtons() {
 }
 
 console.log = function(msg) {
-    if (msg == "adjustOpacity" || msg == "nextTransfer" || msg == "addFlightPath" || msg == "checkAnswer" ||
+    if (msg === "adjustOpacity" || msg === "nextTransfer" || msg === "addFlightPath" || msg === "checkAnswer" ||
         /^You have answered \d+ out of \d+ correctly.$/.test(msg)) {
 
         return;
     }
 
-    if (msg == "moveOn" || msg == "gameOver") {
+    if (msg === "moveOn" || msg === "gameOver") {
         
-        if (DEBUG && matches.length == 0) {
+        if (DEBUG && matches.length === 0) {
 
             var clubsPadded = [];
             for (var i = 0; i < clubs.length; i++) {
@@ -156,16 +155,16 @@ console.log = function(msg) {
 
     findMatches();
 
-    if (matches.length == 0) {
+    if (matches.length === 0) {
         exhausted = true;
         return;
     }
 
-    if (matches.length == 1) {
+    if (matches.length === 1) {
         document.title = clubs + " -> " + matches[0];
 
         for (var i = 0; i < answerButtons.length; i++) {
-            if (matches[0] == answerButtons[i].firstChild.nodeValue) {
+            if (matches[0] === answerButtons[i].firstChild.nodeValue) {
                 answerButtons[i].click();
                 break;
             }
@@ -185,17 +184,17 @@ console.log = function(msg) {
     var answerMatches = [];
     for (var j = 0; j < matches.length; j++) {
         for (var i = 0; i < answerOptions.length; i++) {
-            if (answerOptions[i] == matches[j]) {
+            if (answerOptions[i] === matches[j]) {
                 answerMatches.push(answerButtons[i]);
                 break;
             }
         }
     }
 
-    if (answerMatches.length == 0) {
+    if (answerMatches.length === 0) {
         document.title = "No matches in answers";
         exhausted = true;
-    } else if (answerMatches.length == 1) {
+    } else if (answerMatches.length === 1) {
         document.title = clubs + " -> " + answerMatches[0].firstChild.nodeValue;
         answerMatches[0].click();
     }
