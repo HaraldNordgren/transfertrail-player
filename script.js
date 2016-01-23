@@ -95,9 +95,10 @@ var answerButtons           = document.getElementsByClassName("sidebar-qa-conten
 var answerOptions           = [];
 var clubs                   = [];
 var matches                 = [];
+var answerMatches           = [];
 var exhausted               = false;
 var answerOptionsUpdated    = false;
-var DEBUG                   = true;
+//var DEBUG                   = true;
 
 function findMatches() {
     matches = [];
@@ -116,6 +117,32 @@ function getPlayerNameFromAnswerButtons() {
     }
 }
 
+function oneMatch(match) {
+    document.title = clubs + " -> " + match;
+
+    for (var i = 0; i < answerButtons.length; i++) {
+        if (match === answerButtons[i].firstChild.nodeValue) {
+            answerButtons[i].click();
+            break;
+        }
+    }
+
+    exhausted = true;
+}
+
+function findAnswerMatches() {
+    answerMatches = [];
+    
+    for (var j = 0; j < matches.length; j++) {
+        for (var i = 0; i < answerOptions.length; i++) {
+            if (answerOptions[i] === matches[j]) {
+                answerMatches.push(answerButtons[i]);
+                break;
+            }
+        }
+    }
+}
+
 console.log = function(msg) {
     if (msg === "adjustOpacity" || msg === "nextTransfer" || msg === "addFlightPath" || msg === "checkAnswer" ||
         /^You have answered \d+ out of \d+ correctly.$/.test(msg)) {
@@ -125,6 +152,7 @@ console.log = function(msg) {
 
     if (msg === "moveOn" || msg === "gameOver") {
         
+        /*
         if (DEBUG && matches.length === 0) {
 
             var clubsPadded = [];
@@ -139,6 +167,7 @@ console.log = function(msg) {
             }
             window.prompt("", p);
         }
+        */
 
         document.title = originalTitle;
         clubs = [];
@@ -161,16 +190,7 @@ console.log = function(msg) {
     }
 
     if (matches.length === 1) {
-        document.title = clubs + " -> " + matches[0];
-
-        for (var i = 0; i < answerButtons.length; i++) {
-            if (matches[0] === answerButtons[i].firstChild.nodeValue) {
-                answerButtons[i].click();
-                break;
-            }
-        }
-
-        exhausted = true;
+        oneMatch(matches[0]);
         return;
     }
 
@@ -181,15 +201,7 @@ console.log = function(msg) {
         answerOptionsUpdated = true;
     }
 
-    var answerMatches = [];
-    for (var j = 0; j < matches.length; j++) {
-        for (var i = 0; i < answerOptions.length; i++) {
-            if (answerOptions[i] === matches[j]) {
-                answerMatches.push(answerButtons[i]);
-                break;
-            }
-        }
-    }
+    findAnswerMatches();
 
     if (answerMatches.length === 0) {
         document.title = "No matches in answers";
