@@ -1,4 +1,4 @@
-var clubsByPlayer = {
+var clubsByPlayerFull = {
     "Alan Shearer"         : ["Southampton","Blackburn Rovers","Newcastle United"],
     "Andrea Pirlo"         : ["Brescia","Internazionale","Reggina","Brescia","A.C. Milan","Juventus","New York City FC"],
     "Ángel Di María"       : ["Benfica","Real Madrid","Manchester United","PSG"],
@@ -90,6 +90,7 @@ var clubsByPlayer = {
     "Zlatan Ibrahimović"   : ["Malmo","Ajax","Juventus","Internazionale"]
 };
 
+var clubsByPlayer           = JSON.parse(JSON.stringify(clubsByPlayerFull));
 var originalTitle           = document.title;
 var answerButtons           = document.getElementsByClassName("sidebar-qa-content__answers")[0].getElementsByTagName("a");
 var answerOptions           = [];
@@ -103,9 +104,11 @@ var answerOptionsUpdated    = false;
 function findMatches() {
     matches = [];
     for (var player in clubsByPlayer) {
-        playerClubs = clubsByPlayer[player];
-        if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0, clubs.length)) === JSON.stringify(clubs)) {
-            matches.push(player.replace(/_/g, ''));
+        if (clubsByPlayer.hasOwnProperty(player)) {
+            playerClubs = clubsByPlayer[player];
+            if (clubs.length <= playerClubs.length && JSON.stringify(playerClubs.slice(0, clubs.length)) === JSON.stringify(clubs)) {
+                matches.push(player.replace(/_/g, ''));
+            }
         }
     }
 }
@@ -123,6 +126,7 @@ function oneMatch(match) {
     for (var i = 0; i < answerButtons.length; i++) {
         if (match === answerButtons[i].firstChild.nodeValue) {
             answerButtons[i].click();
+            delete clubsByPlayer[match];
             break;
         }
     }
@@ -141,6 +145,14 @@ function findAnswerMatches() {
             }
         }
     }
+}
+
+function resetAttributes() {
+    clubsByPlayer           = JSON.parse(JSON.stringify(clubsByPlayerFull));
+    document.title          = originalTitle;
+    clubs                   = [];
+    exhausted               = false;
+    answerOptionsUpdated    = false;
 }
 
 console.log = function(msg) {
@@ -169,10 +181,7 @@ console.log = function(msg) {
         }
         */
 
-        document.title = originalTitle;
-        clubs = [];
-        exhausted = false;
-        answerOptionsUpdated = false;
+        resetAttributes();
         return;
     }
 
@@ -207,8 +216,10 @@ console.log = function(msg) {
         document.title = "No matches in answers";
         exhausted = true;
     } else if (answerMatches.length === 1) {
-        document.title = clubs + " -> " + answerMatches[0].firstChild.nodeValue;
+        var player = answerMatches[0].firstChild.nodeValue;
+        document.title = clubs + " -> " + player;
         answerMatches[0].click();
+        delete clubsByPlayer[player];
     }
 };
 
