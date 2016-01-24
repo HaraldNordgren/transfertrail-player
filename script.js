@@ -148,7 +148,7 @@ function findAnswerMatches() {
 }
 
 function resetAttributes() {
-    clubsByPlayer           = JSON.parse(JSON.stringify(clubsByPlayerFull));
+    //clubsByPlayer           = JSON.parse(JSON.stringify(clubsByPlayerFull));
     document.title          = originalTitle;
     clubs                   = [];
     exhausted               = false;
@@ -162,7 +162,7 @@ console.log = function(msg) {
         return;
     }
 
-    if (msg === "moveOn" || msg === "gameOver") {
+    if (msg === "moveOn") {
         
         /*
         if (DEBUG && matches.length === 0) {
@@ -182,6 +182,12 @@ console.log = function(msg) {
         */
 
         resetAttributes();
+        return;
+    }
+
+    if (msg === "gameOver") {
+        resetAttributes();
+        clubsByPlayer = JSON.parse(JSON.stringify(clubsByPlayerFull));
         return;
     }
 
